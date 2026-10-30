@@ -17,4 +17,6 @@ jobs:
       - run: cargo fmt --check
       - run: cargo clippy --all-targets --locked -- -D warnings
       - run: cargo test --locked
-      - run: shellcheck scripts/*.sh
+      # Preinstalled on the Ubuntu runners only; the script is portable sh, so once is enough.
+      - if: runner.os == 'Linux'
+        run: shellcheck scripts/*.sh
